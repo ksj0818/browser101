@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>window_scrolling</title>
+    <style>
+      div {
+        background-color: wheat;
+        width: 200px;
+        height: 200px;
+        margin: 10px;
+      }
+      .special {
+        background-color: darkorange;
+      }
+      .btns {
+        position: fixed;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .btns button {
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="btns">
+      <button id="by">scroll by 100px(x)</button>
+      <button id="to">scroll to 100px(y)</button>
+      <button id="onSpecial">scroll into special</button>
+    </header>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <!-- 
+      input, textarea와 같은 텍스트 입력 태그가 아닌 div와 같은 태그에
+      contenteditable="true" 추가해주면 입력 태그와 같이 입력 가능하게 해준다. 
+      하지만 지금은 포커스만 가도록 해야함
+    -->
+    <div class="special" tabindex="0"></div>
+    <div></div>
+    <div></div>
+    <!-- js -->
+    <script>
+      let by = document.getElementById("by");
+      let to = document.getElementById("to");
+      let onSpecial = document.getElementById("onSpecial");
+      let ynum = 0;
+
+      addEventListener("click", (e) => {
+        let special = document.querySelector(".special");
+        let id = e.target.id;
+        console.log(e);
+        if (id === "onSpecial") {
+          console.log(special.offsetTop); // 해당 요소의 top 위치 (마진 값 포함)
+          // special.focus({ preventScroll: false }); input, textarea 같은 태그에만 적용
+          // window.location.hash = "#special"; url이 바뀜
+          // special.focus(); // div 태그에 tapindex 속성 주기 이것도 되지만 좌표값을 얻어와서 이동하는 방법도 찾아보기
+          // scrollTo({ top: special.offsetTop, behavior: "smooth" });
+
+          // 위에는 내가 한거 이건 강의에서 나온거
+          special.scrollIntoView();
+        } else if (id === "by") {
+          // ynum >= e.screenY;
+          // scrollTo({ top: (ynum += 100), behavior: "smooth" });
+
+          // 위에는 내가 한거 이건 강의에서 나온거
+          scrollBy(0, 100);
+        } else if (id === "to") { 
+          scrollTo({ top: 100, behavior: "smooth" });
+        }
+      });
+    </script>
+  </body>
+</html>

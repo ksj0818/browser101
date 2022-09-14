@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Window Size</title>
+    <style>
+      .tag,
+      .tag2,
+      .tag3,
+      .tag4 {
+        display: inline-block;
+        background-color: wheat;
+        padding: 16px;
+        margin-top: 16px;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- 
+      window.screen : 브라우저 바깥에 있는 해상도까지 합한 모니터 사이즈
+      window.outer : 브라우저에 있는 url, tap, 전체적인 브라우저의 사이즈
+      window.inner : 웹페이지 뿐만 아니라 웹페이지 수직에 스크롤바가 표기되는 모든 것을 합한 사이즈 
+      document.documentElement.clientWidth : 문서 자체를 의미 전체적인 페이지이긴한데 만약 수직 스크롤바가 있다면 제외한 사이즈
+     -->
+    <div class="tag"></div>
+
+    <script>
+      function updateTat() {
+        let tag = document.querySelector(".tag");
+        tag.innerHTML = `window.screen: ${window.screen.width}, ${window.screen.height} <br/>
+        window.outer: ${window.outerWidth}, ${window.outerHeight}<br/>
+        window.inner: ${window.innerWidth}, ${window.innerHeight}<br/>
+        documentElement.clientWidth : ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}`;
+      }
+      window.addEventListener("resize", () => {
+        updateTat();
+      });
+      updateTat();
+    </script>
+  </body>
+</html>
